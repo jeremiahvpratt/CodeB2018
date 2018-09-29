@@ -45,14 +45,18 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
         if(mineFinding):
             if len(stats['mines']) > 0:
                 chk = checkMine(stats)
-                if(chk == -2):
+                if(chk > -1):
                     print('MINE FOUND')
                     run('ElectricBoogalo','kirtyhurty','BRAKE')
-                    while(Moving):
-                        stats = parseStatus()
-                        if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
-                            Moving = False
-                    return 1
+                    time.sleep(5)
+                    mineFinding = False
+                    xDest = stats['mines'][chk][1]
+                    yDest = stats['mines'][chk][2]
+                    # while(Moving):
+                    #     stats = parseStatus()
+                    #     if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
+                    #         Moving = False
+                    # return 1
         if(mineTaking):
             # run('ElectricBoogalo','kirtyhurty','BRAKE')
             # time.sleep(.0001)
