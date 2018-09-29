@@ -51,7 +51,7 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
                     return 1
         if(mineTaking):
             # run('ElectricBoogalo','kirtyhurty','BRAKE')
-            # time.sleep(.001)
+            # time.sleep(.0001)
             chk = checkMine(stats)
             speed = 0.5
             if(chk == -2):
@@ -76,7 +76,7 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
         run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle) + ' ' + str(speed))
 
         if(not mineTaking):
-            if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < float(VISIONRADIUS) * 2):
+            if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < float(globals.VISIONRADIUS) * 2):
                 # run('ElectricBoogalo','kirtyhurty','BRAKE')
                 # while(Moving):
                 #     stats = parseStatus()

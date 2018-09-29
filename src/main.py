@@ -3,6 +3,10 @@ from moveDiag import moveDiag
 from moveToPoint import moveToPoint
 from parseStatus import runRet, parseStatus
 from findCircles import findCircles
+from bestPathAlg import bestPathAlg
+from scanAhead import scanAhead
+from clientpy3 import run
+import numpy as np
 import globals
 
 globals.init()
@@ -25,10 +29,13 @@ globals.SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 
 circles = findCircles('canvas.png')
 path = bestPathAlg(circles.T)
-for point in path:
+for i in range(np.shape(path)[0]):
+    print(path[i][0])
+    print(path[i][1])
     curInfo = parseStatus()
-    
-    moveToPoint(curInfo['x'],curInfo['y'],point[0],point[1])
+    xTrue, yTrue = scanAhead(path[i][0],path[i][1])
+    moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
+    run('ElectricBoogalo','kirtyhurty','BRAKE')
 # print(circles)
 # while(True):
 #     curInfo = parseStatus()

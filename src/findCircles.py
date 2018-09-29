@@ -18,7 +18,7 @@ def findCircles(path):
     hough_radii = np.arange(5,50,2)
     hough_res = hough_circle(edges, hough_radii)
 
-    accums, cx, cy, radii = hough_circle_peaks(hough_res, hough_radii, total_num_peaks=45)
+    accums, cx, cy, radii = hough_circle_peaks(hough_res, hough_radii, total_num_peaks=30)
 
     # fig, ax = plt.subplots(ncols=1, nrows=1, figsize=(10,4))
     # image = color.gray2rgb(image)
