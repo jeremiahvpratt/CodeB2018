@@ -38,7 +38,6 @@ while(True):
             curInfo = parseStatus()
             xTrue, yTrue = scanAhead(path[i][0],path[i][1])
             if (xTrue == -1 and yTrue == -1):
-                print ('point skipped')
                 continue
             moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
             run('ElectricBoogalo','kirtyhurty','BRAKE')
