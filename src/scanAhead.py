@@ -1,6 +1,8 @@
 from parseStatus import runRet, parseStatus
+from decideDirection import decideDirection
 from clientpy3 import run
 from traceMap import traceMap
+import numpy as np
 import time
 import math
 import globals
@@ -13,6 +15,13 @@ def scanAhead(x, y):
 
     while (status_rets[0] == 'ERROR'):
         status = runRet('ElectricBoogalo', 'kirtyhurty', 'SCAN '+ str(x) + ' ' + str(y))
+        stats = parseStatus()
+        xDest,yDest = x,y
+        xDest,yDest = decideDirection(stats,xDest,yDest)
+        angle = np.arctan((yDest-float(stats['y']))/(xDest-float(stats['x'])))
+        if(xDest < float(stats['x'])):
+            angle += np.pi
+        run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle) + ' 1')
         status_rets = status.split(" ")
         status_rets = list(filter(None, status_rets))
         time.sleep(0.1)

@@ -4,6 +4,7 @@ from parseStatus import parseStatus
 from checkMine import checkMine
 from traceMap import traceMap
 from decideDirection import decideDirection
+from bombsAway import bombsAway
 import globals
 from checkGotWormholed import checkGotWormholed
 import time
@@ -36,7 +37,9 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
     oldY = float(stats['y'])
 
     while(Moving):
+
         stats = parseStatus()
+        bombsAway(stats)
         if(checkGotWormholed(oldX,oldY,stats['x'],stats['y']) == 1):
             return -1
         if(mineFinding):

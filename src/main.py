@@ -29,21 +29,21 @@ globals.SCANRADIUS = config_rets[config_rets.index('SCANRADIUS') + 1]
 globals.SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 
 circles = findCircles('canvas.png')
+print(circles.T)
 path = bestPathAlg(circles.T)
+print(path)
 while(True):
-    try:
-        for i in range(np.shape(path)[0]):
-            print(path[i][0])
-            print(path[i][1])
-            curInfo = parseStatus()
-            xTrue, yTrue = scanAhead(path[i][0],path[i][1])
-            if (xTrue == -1 and yTrue == -1):
-                continue
-            moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
-            run('ElectricBoogalo','kirtyhurty','BRAKE')
-            time.sleep(6)
-    except:
-        continue
+    for i in range(np.shape(path)[0]):
+        print(path[i][0])
+        print(path[i][1])
+        curInfo = parseStatus()
+        xTrue, yTrue = scanAhead(path[i][0],path[i][1])
+        if (xTrue == -1 and yTrue == -1):
+            continue
+        moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
+        run('ElectricBoogalo','kirtyhurty','BRAKE')
+        time.sleep(6)
+
 # print(circles)
 # while(True):
 #     curInfo = parseStatus()
