@@ -5,6 +5,7 @@ from checkMine import checkMine
 from traceMap import traceMap
 import globals
 from checkGotWormholed import checkGotWormholed
+import time
 
 def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False):
 
