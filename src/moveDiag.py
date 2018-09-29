@@ -2,10 +2,10 @@ from clientpy3 import run
 from parseStatus import parseStatus
 from moveToPoint import moveToPoint
 from checkMine import checkMine
-from traceMap import traceMap
 import numpy as np
+import globals
 
-def moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNOWN_MINE_LOC_UNLAB):
+def moveDiag(curInfo,VISIONRADIUS,MAPWIDTH):
 
     chk = checkMine(curInfo)
     if chk > -1:
@@ -22,8 +22,6 @@ def moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNO
     # run('ElectricBoogalo', 'kirtyhurty', 'ACCELERATE ' + str(np.arctan(2*float(VISIONRADIUS)/float(MAPWIDTH))) + ' 1')
     while foundMine == False:
         curInfo = parseStatus()
-        if len(curInfo['mines']) > 0 or len(curInfo['wormholes']) > 0:
-            traceMap(curInfo['mines'], curInfo['wormholes'],KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNOWN_MINE_LOC_UNLAB)
         chk = checkMine(curInfo)
         if chk > -1:
             run('ElectricBoogalo', 'kirtyhurty', 'BRAKE')
@@ -38,5 +36,4 @@ def moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNO
     curInfo = parseStatus()
     x = curInfo['x']
     y = curInfo['y']
-    moveToPoint(x, y, minex, miney,VISIONRADIUS,mineTaking=True)
-#     run('ElectricBoogalo', 'kirtyhurty', 'BRAKE')
+    moveToPoint(x, y, minex, miney, mineTaking=True)

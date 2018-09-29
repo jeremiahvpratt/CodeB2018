@@ -2,6 +2,9 @@
 from moveDiag import moveDiag
 from moveToPoint import moveToPoint
 from parseStatus import runRet, parseStatus
+import globals
+
+globals.init()
 
 config = runRet('ElectricBoogalo', 'kirtyhurty', 'CONFIGURATIONS')
 config_rets = config.split(" ")
@@ -18,11 +21,8 @@ BOMBPOWER = config_rets[config_rets.index('BOMBPOWER') + 1]
 SCANRADIUS = config_rets[config_rets.index('SCANRADIUS') + 1]
 SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 
-KNOWN_MINE_LOC = []
-KNOWN_WORMHOLE_LOC = []
-KNOWN_MINE_LOC_UNLAB = []
-curInfo=parseStatus()
-# moveToPoint(curInfo['x'],curInfo['y'],5000,5000,VISIONRADIUS)
 while(True):
     curInfo = parseStatus()
-    moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNOWN_MINE_LOC)
+    moveDiag(curInfo,VISIONRADIUS,MAPWIDTH)
+    print (globals.KNOWN_MINE_LOC)
+    print (globals.KNOWN_MINE_LOC_UNLAB)

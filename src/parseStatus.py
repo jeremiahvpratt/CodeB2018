@@ -1,5 +1,7 @@
 import socket
 import sys
+from traceMap import traceMap
+import globals
 
 def runRet(user, password, * commands):
     HOST, PORT = "codebb.cloudapp.net", 17429
@@ -53,6 +55,9 @@ def parseStatus():
         for ii in range(int(numWormholes)):
             wormhole = [float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+2)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+3)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+4)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+5)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+6)])]
             wormholeList.append(wormhole)
+
+    if int(numMines) > 0 or int(numWormholes) > 0:
+        traceMap(mineList, wormholeList)
 
     out = {
         'x': float(status_rets[1]),

@@ -3,9 +3,10 @@ from clientpy3 import run
 from parseStatus import parseStatus
 from checkMine import checkMine
 from traceMap import traceMap
+import globals
 from checkGotWormholed import checkGotWormholed
 
-def moveToPoint(xCur,yCur,xDest,yDest,VISIONRADIUS,mineFinding=False,mineTaking=False):
+def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False):
 
     speed = 1
     #STOP SHIP FIRST
@@ -93,10 +94,10 @@ def moveToPoint(xCur,yCur,xDest,yDest,VISIONRADIUS,mineFinding=False,mineTaking=
 #Shortest Path Math
 def checkWormHoleCollision(xCur,yCur,xDest,yDest):
     print('thats this')
-    for i in range(len(KNOWN_WORMHOLE_LOC)-1):
-        wormX = float(KNOWN_WORMHOLE_LOC[i][0])
-        wormY = float(KNOWN_WORMHOLE_LOC[i][1])
-        rad = float(KNOWN_WORMHOLE_LOC[i][2])
+    for i in range(len(globals.KNOWN_WORMHOLE_LOC)-1):
+        wormX = float(globals.KNOWN_WORMHOLE_LOC[i][0])
+        wormY = float(globals.KNOWN_WORMHOLE_LOC[i][1])
+        rad = float(globals.KNOWN_WORMHOLE_LOC[i][2])
 
         #shortest distance to line calculation
         distToLine = (np.abs((xDest-xCur)*wormX + (yCur-yDest)*wormY +
