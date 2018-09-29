@@ -16,6 +16,7 @@ def scanAhead(x, y):
         status_rets = status.split(" ")
         status_rets = list(filter(None, status_rets))
         time.sleep(0.1)
+        
     numMines = status_rets[status_rets.index('MINES') + 1]
     mineList= []
     if numMines != 0:

@@ -8,6 +8,7 @@ from scanAhead import scanAhead
 from clientpy3 import run
 import numpy as np
 import globals
+import time 
 
 globals.init()
 
@@ -34,8 +35,9 @@ for i in range(np.shape(path)[0]):
     print(path[i][1])
     curInfo = parseStatus()
     xTrue, yTrue = scanAhead(path[i][0],path[i][1])
-    moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
+    print(moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True))
     run('ElectricBoogalo','kirtyhurty','BRAKE')
+    time.sleep(3)
 # print(circles)
 # while(True):
 #     curInfo = parseStatus()

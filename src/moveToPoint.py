@@ -52,10 +52,12 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
         if(mineTaking):
             # run('ElectricBoogalo','kirtyhurty','BRAKE')
             # time.sleep(.0001)
-            chk = checkMine(stats)
-            speed = 0.5
-            if(chk == -2):
-                return 3
+            if(np.sqrt((float(stats['x'])-xDest)**2+(float(stats['y'])-yDest)**2) < float(globals.VISIONRADIUS)):
+                chk = checkMine(stats)
+                print(chk)
+                speed = 0.5
+                if(chk == -2):
+                    return 3
         angle = np.arctan((yDest-float(stats['y']))/(xDest-float(stats['x'])))
         if(xDest < float(stats['x'])):
             angle += np.pi
