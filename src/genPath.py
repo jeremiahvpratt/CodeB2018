@@ -1,0 +1,7 @@
+
+KNOWN_MINE_LOC = []
+KNOWN_WORMHOLE_LOC = []
+KNOWN_MINE_LOC_UNLAB = []
+
+
+def genPath():
