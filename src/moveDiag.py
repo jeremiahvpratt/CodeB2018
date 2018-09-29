@@ -17,8 +17,9 @@ def moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNO
 
     x = curInfo['x']
     y = curInfo['y']
-
-    run('ElectricBoogalo', 'kirtyhurty', 'ACCELERATE ' + str(np.arctan(2*float(VISIONRADIUS)/float(MAPWIDTH))) + ' 1')
+    angle = np.random.uniform(0,2*np.pi)
+    run('ElectricBoogalo', 'kirtyhurty', 'ACCELERATE ' + str(angle) + ' 1')
+    # run('ElectricBoogalo', 'kirtyhurty', 'ACCELERATE ' + str(np.arctan(2*float(VISIONRADIUS)/float(MAPWIDTH))) + ' 1')
     while foundMine == False:
         curInfo = parseStatus()
         if len(curInfo['mines']) > 0 or len(curInfo['wormholes']) > 0:
@@ -37,5 +38,5 @@ def moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNO
     curInfo = parseStatus()
     x = curInfo['x']
     y = curInfo['y']
-    moveToPoint(x, y, minex, miney,mineTaking=True)
+    moveToPoint(x, y, minex, miney,VISIONRADIUS,mineTaking=True)
 #     run('ElectricBoogalo', 'kirtyhurty', 'BRAKE')

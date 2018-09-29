@@ -3,8 +3,9 @@ from clientpy3 import run
 from parseStatus import parseStatus
 from checkMine import checkMine
 from traceMap import traceMap
+from checkGotWormholed import checkGotWormholed
 
-def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
+def moveToPoint(xCur,yCur,xDest,yDest,VISIONRADIUS,mineFinding=False,mineTaking=False):
 
     speed = 1
     #STOP SHIP FIRST
@@ -27,8 +28,14 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
 
     #TIME TO ACCELERATE
     Moving = True
+    stats = parseStatus()
+    oldX = float(stats['x'])
+    oldY = float(stats['y'])
+
     while(Moving):
         stats = parseStatus()
+        if(checkGotWormholed(oldX,oldY,stats['x'],stats['y']) == 1):
+            return -1
         if(mineFinding):
             if len(stats['mines']) > 0:
                 chk = checkMine(stats)
@@ -41,6 +48,8 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
                             Moving = False
                     return 1
         if(mineTaking):
+            run('ElectricBoogalo','kirtyhurty','BRAKE')
+            time.sleep(.1)
             chk = checkMine(stats)
             speed = 0.5
             if(chk == -2):
@@ -49,6 +58,8 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
         if(xDest < float(stats['x'])):
             angle += np.pi
         print(angle)
+        oldX = stats['x']
+        oldY = stats['y']
         #CHECK FOR UNKNOWN WORMHOLES. IF DETECTED, BRAKE IMMEDIATELY.
 #         if(len(stats['wormholes']) > 0):
 # #             run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle+np.pi) + ' 1')

@@ -21,6 +21,8 @@ SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 KNOWN_MINE_LOC = []
 KNOWN_WORMHOLE_LOC = []
 KNOWN_MINE_LOC_UNLAB = []
+curInfo=parseStatus()
+# moveToPoint(curInfo['x'],curInfo['y'],5000,5000,VISIONRADIUS)
 while(True):
     curInfo = parseStatus()
     moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNOWN_MINE_LOC)
