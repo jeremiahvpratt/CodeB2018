@@ -7,7 +7,7 @@ import globals
 from checkGotWormholed import checkGotWormholed
 import time
 
-def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False):
+def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundFromScanning=False):
 
     speed = 1
     #STOP SHIP FIRST
