@@ -1,13 +1,9 @@
-import random, numpy, math, copy #, matplotlib.pyplot as plt
+import random, numpy, math, copy# s, matplotlib.pyplot as plt
 
-def bestPathAlg(KNOWN_MINE_LOC, KNOWN_MINE_LOC_UNLAB):
-	l=[]	#dont go to places we own
-	for n in range(len(KNOWN_MINE_LOC)):
-		if KNOWN_MINE_LOC[n][0] != 'ElectricBoogalo':
-			l.append(KNOWN_MINE_LOC_UNLAB[n])
-
-	nMines=len(l)
-	cities = l
+def bestPathAlg(L):
+	
+	nMines=len(L)
+	cities = L
 	path = random.sample(range(nMines),nMines);#generate random path of indecies [7,1,4,3,5,2,8,6]
 
 	for temp in numpy.logspace(0,5.5,num=100000)[::-1]: # generates a logarithmic spacing of 0->10^5 with 100k points 
@@ -33,18 +29,18 @@ def bestPathAlg(KNOWN_MINE_LOC, KNOWN_MINE_LOC_UNLAB):
 			path = copy.copy(newpath);
 
 	pth = list(zip([cities[path[i % nMines]][0] for i in range(nMines+1)], [cities[path[i % nMines]][1] for i in range(nMines+1)]))
+	pthList = [list(pth[z]) for z in range(len(path)) ]
+	#print (len (path))
 	#print(pth,temp)
 	#plt.plot([cities[path[i % nMines]][0] for i in range(nMines+1)], [cities[path[i % nMines]][1] for i in range(nMines+1)], 'xb-');
 	#plt.show()
 
-	return(pth)
+	return(pthList)
 	
 '''
-nM = 35
+nM = 45
 cities = [random.sample(list(numpy.linspace(0,1023,2000)), 2) for x in range(nM)];
 
-e = 1
-
-BestPathAlg(e,cities)
+print(bestPathAlg(cities))
 
 '''
