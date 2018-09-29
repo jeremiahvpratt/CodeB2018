@@ -43,6 +43,7 @@ while(True):
             run('ElectricBoogalo','kirtyhurty','BRAKE')
             time.sleep(6)
     except:
+        continue
 # print(circles)
 # while(True):
 #     curInfo = parseStatus()
