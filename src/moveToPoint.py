@@ -50,8 +50,8 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
                             Moving = False
                     return 1
         if(mineTaking):
-            run('ElectricBoogalo','kirtyhurty','BRAKE')
-            time.sleep(.001)
+            # run('ElectricBoogalo','kirtyhurty','BRAKE')
+            # time.sleep(.001)
             chk = checkMine(stats)
             speed = 0.5
             if(chk == -2):

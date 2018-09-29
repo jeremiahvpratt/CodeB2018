@@ -24,9 +24,14 @@ globals.SCANRADIUS = config_rets[config_rets.index('SCANRADIUS') + 1]
 globals.SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 
 circles = findCircles('canvas.png')
-print(circles)
-while(True):
+path = bestPathAlg(circles.T)
+for point in path:
     curInfo = parseStatus()
-    moveDiag(curInfo,globals.VISIONRADIUS,globals.MAPWIDTH)
-    print (globals.KNOWN_MINE_LOC)
-    print (globals.KNOWN_MINE_LOC_UNLAB)
+    
+    moveToPoint(curInfo['x'],curInfo['y'],point[0],point[1])
+# print(circles)
+# while(True):
+#     curInfo = parseStatus()
+#     moveDiag(curInfo,globals.VISIONRADIUS,globals.MAPWIDTH)
+#     print (globals.KNOWN_MINE_LOC)
+#     print (globals.KNOWN_MINE_LOC_UNLAB)
