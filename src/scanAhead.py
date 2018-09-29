@@ -4,7 +4,7 @@ from traceMap import traceMap
 import math
 import globals
 
-def searchAhead(x, y):
+def scanAhead(x, y):
 
     status = runRet('ElectricBoogalo', 'kirtyhurty', 'SCAN '+ str(x) + ' ' + str(y))
     status_rets = status.split(" ")
