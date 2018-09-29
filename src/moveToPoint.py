@@ -1,5 +1,9 @@
 import numpy as np
-
+from clientpy3 import run
+from parseStatus import parseStatus
+from checkMine import checkMine
+from traceMap import traceMap
+ 
 def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
 
     speed = 1

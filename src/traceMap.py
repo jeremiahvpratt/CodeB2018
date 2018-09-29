@@ -1,5 +1,5 @@
 # keep track of all mines and wormholes
-def traceMap(mines, wormholes): #input bomb mine and wormhole locations from our scan
+def traceMap(mines, wormholes,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNOWN_MINE_LOC_UNLAB): #input bomb mine and wormhole locations from our scan
     for i in range(len(mines)): #check if already in list with proper name
         if mines[i] in KNOWN_MINE_LOC:
             #the mine is in the global list
@@ -16,4 +16,4 @@ def traceMap(mines, wormholes): #input bomb mine and wormhole locations from our
     for j in range(len(wormholes)):
         if wormholes[j] not in KNOWN_WORMHOLE_LOC:
             #the wormhole is unknown so we add it
-            KNOWN_WORMHOLE_LOC.append(wormholes[j])  
+            KNOWN_WORMHOLE_LOC.append(wormholes[j])

@@ -1,8 +1,8 @@
-
-
-
-
 # retrieve config GLOBALS
+from moveDiag import moveDiag
+from moveToPoint import moveToPoint
+from parseStatus import runRet, parseStatus
+
 config = runRet('ElectricBoogalo', 'kirtyhurty', 'CONFIGURATIONS')
 config_rets = config.split(" ")
 MAPWIDTH = config_rets[config_rets.index('MAPWIDTH') + 1]
@@ -21,3 +21,6 @@ SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 KNOWN_MINE_LOC = []
 KNOWN_WORMHOLE_LOC = []
 KNOWN_MINE_LOC_UNLAB = []
+while(True):
+    curInfo = parseStatus()
+    moveDiag(curInfo,VISIONRADIUS,MAPWIDTH,KNOWN_WORMHOLE_LOC,KNOWN_MINE_LOC,KNOWN_MINE_LOC)

@@ -1,5 +1,6 @@
 import socket
 import sys
+import time
 
 
 def run(user, password, * commands):
@@ -26,3 +27,13 @@ def subscribe(user, password):
         while rline:
             print(rline.strip())
             rline = sfile.readline()
+
+# run('ElectricBoogalo','kirtyhurty','ACCELERATE 0 1')
+# # run('ElectricBoogalo','kirtyhurty','BOMB 0 0')
+# time.sleep(5)
+# doRun = True
+# run('ElectricBoogalo','kirtyhurty','BRAKE')
+# while(doRun):
+#     run('ElectricBoogalo','kirtyhurty','STATUS')
+#     time.sleep(.1)
+run('ElectricBoogalo','kirtyhurty','CONFIGURATIONS')
