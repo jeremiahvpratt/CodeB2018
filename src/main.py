@@ -41,7 +41,7 @@ while(True):
             continue
         moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
         run('ElectricBoogalo','kirtyhurty','BRAKE')
-        time.sleep(3)
+        time.sleep(4)
 # print(circles)
 # while(True):
 #     curInfo = parseStatus()

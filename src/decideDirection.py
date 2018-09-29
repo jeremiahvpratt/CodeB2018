@@ -3,10 +3,10 @@ import globals
 
 def decideDirection(curInfo, newx, newy):
 
-    x = curInfo['x']
-    y = curInfo['y']
+    x = float(curInfo['x'])
+    y = float(curInfo['y'])
 
-    if (math.hypot(x-newx, y-newy)) > (math.hypot(x+(globals.MAPWIDTH-newx), y+(globals.MAPHEIGHT-newy))):
-        return -(globals.MAPWIDTH-newx), -(globals.MAPWIDTH-newy)
+    if (math.hypot(x-newx, y-newy)) > (math.hypot(x+(float(globals.MAPWIDTH)-newx), y+(float(globals.MAPHEIGHT)-newy))):
+        return -(float(globals.MAPWIDTH)-newx), -(float(globals.MAPWIDTH)-newy)
     else:
         return newx, newy

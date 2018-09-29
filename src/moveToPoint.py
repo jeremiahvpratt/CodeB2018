@@ -3,6 +3,7 @@ from clientpy3 import run
 from parseStatus import parseStatus
 from checkMine import checkMine
 from traceMap import traceMap
+from decideDirection import decideDirection
 import globals
 from checkGotWormholed import checkGotWormholed
 import time
@@ -55,9 +56,12 @@ def moveToPoint(xCur,yCur,xDest,yDest, mineFinding=False,mineTaking=False,foundF
             if(np.sqrt((float(stats['x'])-xDest)**2+(float(stats['y'])-yDest)**2) < float(globals.VISIONRADIUS)):
                 chk = checkMine(stats)
                 print(chk)
+                run('ElectricBoogalo','kirtyhurty','BRAKE')
+                time.sleep(.001)
                 speed = 0.5
                 if(chk == -2):
                     return 3
+        xDest,yDest = decideDirection(stats,xDest,yDest)
         angle = np.arctan((yDest-float(stats['y']))/(xDest-float(stats['x'])))
         if(xDest < float(stats['x'])):
             angle += np.pi
