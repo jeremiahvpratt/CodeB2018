@@ -35,7 +35,10 @@ for i in range(np.shape(path)[0]):
     print(path[i][1])
     curInfo = parseStatus()
     xTrue, yTrue = scanAhead(path[i][0],path[i][1])
-    print(moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True))
+    if (xTrue == -1 and yTrue == -1):
+        print ('point skipped')
+        continue
+    moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
     run('ElectricBoogalo','kirtyhurty','BRAKE')
     time.sleep(3)
 # print(circles)
