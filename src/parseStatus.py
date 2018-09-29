@@ -1,3 +1,6 @@
+import socket
+import sys
+
 def runRet(user, password, * commands):
     HOST, PORT = "codebb.cloudapp.net", 17429
     data = user + " " + password + "\n" + "\n".join(commands) + "\nCLOSE_CONNECTION\n"
@@ -25,14 +28,14 @@ def parseStatus():
     mineList= []
     if numMines != 0:
         for ii in range(int(numMines)):
-            mine = [status_rets[status_rets.index('MINES') + ((ii*3)+2)], status_rets[status_rets.index('MINES') + ((ii*3)+3)], status_rets[status_rets.index('MINES') + ((ii*3)+4)]]
+            mine = [status_rets[status_rets.index('MINES') + ((ii*3)+2)], float(status_rets[status_rets.index('MINES') + ((ii*3)+3)]), float(status_rets[status_rets.index('MINES') + ((ii*3)+4)])]
             mineList.append(mine)
     # players
     numPlayers = status_rets[status_rets.index('PLAYERS') + 1]
     playerList= []
     if numPlayers != 0:
         for ii in range(int(numPlayers)):
-            player = [status_rets[status_rets.index('PLAYERS') + ((ii*4)+2)], status_rets[status_rets.index('PLAYERS') + ((ii*4)+3)], status_rets[status_rets.index('PLAYERS') + ((ii*4)+4)], status_rets[status_rets.index('PLAYERS') + ((ii*3)+5)]]
+            player = [float(status_rets[status_rets.index('PLAYERS') + ((ii*4)+2)]), float(status_rets[status_rets.index('PLAYERS') + ((ii*4)+3)]), float(status_rets[status_rets.index('PLAYERS') + ((ii*4)+4)]), float(status_rets[status_rets.index('PLAYERS') + ((ii*3)+5)])]
             playerList.append(player)
 
     # bombs
@@ -40,7 +43,7 @@ def parseStatus():
     bombList= []
     if numBombs != 0:
         for ii in range(int(numBombs)):
-            bomb = [status_rets[status_rets.index('BOMBS') + ((ii*2)+2)], status_rets[status_rets.index('BOMBS') + ((ii*2)+3)]]
+            bomb = [float(status_rets[status_rets.index('BOMBS') + ((ii*2)+2)]), float(status_rets[status_rets.index('BOMBS') + ((ii*2)+3)])]
             bombList.append(bomb)
 
     # wormholes
@@ -48,14 +51,14 @@ def parseStatus():
     wormholeList= []
     if numWormholes != 0:
         for ii in range(int(numWormholes)):
-            wormhole = [status_rets[status_rets.index('WORMHOLES') + ((ii*5)+2)], status_rets[status_rets.index('WORMHOLES') + ((ii*5)+3)], status_rets[status_rets.index('WORMHOLES') + ((ii*5)+4)], status_rets[status_rets.index('WORMHOLES') + ((ii*5)+5)], status_rets[status_rets.index('WORMHOLES') + ((ii*5)+6)]]
+            wormhole = [float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+2)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+3)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+4)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+5)]), float(status_rets[status_rets.index('WORMHOLES') + ((ii*5)+6)])]
             wormholeList.append(wormhole)
 
     out = {
-        'x': status_rets[1],
-        'y': status_rets[2],
-        'dx': status_rets[3],
-        'dy': status_rets[4],
+        'x': float(status_rets[1]),
+        'y': float(status_rets[2]),
+        'dx': float(status_rets[3]),
+        'dy': float(status_rets[4]),
         'mines': mineList,
         'players': playerList,
         'bombs': bombList,
