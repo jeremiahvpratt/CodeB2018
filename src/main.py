@@ -24,5 +24,3 @@ SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 while(True):
     curInfo = parseStatus()
     moveDiag(curInfo,VISIONRADIUS,MAPWIDTH)
-    print (globals.KNOWN_MINE_LOC)
-    print (globals.KNOWN_MINE_LOC_UNLAB)
