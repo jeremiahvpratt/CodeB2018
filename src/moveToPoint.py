@@ -1,7 +1,6 @@
 import numpy as np
-from main import run
 
-def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False):
+def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
 
     speed = 1
     #STOP SHIP FIRST
@@ -18,9 +17,9 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False):
         angle += np.pi
     print(angle)
     #CHECK FOR POSSIBLE WORMHOLES IN PATH
-    check, angleChange = checkWormHoleCollision(xCur,yCur,xDest,yDest)
-    if(check > -1):
-        avoidWormHole(check, angleChange, angle, xDest,yDest)
+#     check, angleChange = checkWormHoleCollision(xCur,yCur,xDest,yDest)
+#     if(check > -1):
+#         avoidWormHole(check, angleChange, angle, xDest,yDest)
 
     #TIME TO ACCELERATE
     Moving = True
@@ -28,39 +27,47 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False):
         stats = parseStatus()
         if(mineFinding):
             if len(stats['mines']) > 0:
+                chk = checkMine(stats)
+                if(chk == -2):
+                    print('MINE FOUND')
+                    run('ElectricBoogalo','kirtyhurty','BRAKE')
+                    while(Moving):
+                        stats = parseStatus()
+                        if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
+                            Moving = False
+                    return 1
+        if(mineTaking):
             chk = checkMine(stats)
-            if(chk > -1):
-                print('MINE FOUND')
-                run('ElectricBoogalo','kirtyhurty','BRAKE')
-                while(Moving):
-                    stats = parseStatus()
-                    if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
-                        Moving = False
-                return 1
+            if(chk == -2):
+                return 3
         angle = np.arctan((yDest-float(stats['y']))/(xDest-float(stats['x'])))
         if(xDest < float(stats['x'])):
             angle += np.pi
         print(angle)
         #CHECK FOR UNKNOWN WORMHOLES. IF DETECTED, BRAKE IMMEDIATELY.
-        if(len(stats['wormholes']) > 0):
-#             run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle+np.pi) + ' 1')
-#             time.sleep(2)
-#             run('ElectricBoogalo','kirtyhurty','BRAKE')
-            KNOWN_WORMHOLE_LOC.append(stats['wormholes'][0])
-            print(KNOWN_WORMHOLE_LOC)
-            #We know there's a wormhole in the way, probably, let's just do our best to avoid it
-            check, angleChange = checkWormHoleCollision(float(stats['x']),float(stats['y']),xDest,yDest)
-            avoidWormHole(check, angleChange, angle, xDest,yDest)
+#         if(len(stats['wormholes']) > 0):
+# #             run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle+np.pi) + ' 1')
+# #             time.sleep(2)
+# #             run('ElectricBoogalo','kirtyhurty','BRAKE')
+#             KNOWN_WORMHOLE_LOC.append(stats['wormholes'][0])
+#             print(KNOWN_WORMHOLE_LOC)
+#             #We know there's a wormhole in the way, probably, let's just do our best to avoid it
+#             check, angleChange = checkWormHoleCollision(float(stats['x']),float(stats['y']),xDest,yDest)
+#             avoidWormHole(check, angleChange, angle, xDest,yDest)
 
         run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle) + ' ' + str(speed))
 
-        if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < float(VISIONRADIUS) * 2):
-            # run('ElectricBoogalo','kirtyhurty','BRAKE')
-            # while(Moving):
-            #     stats = parseStatus()
-            #     if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
-            #         Moving = False
-            Moving = False
+        if(not mineTaking):
+            if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < float(VISIONRADIUS) * 2):
+                # run('ElectricBoogalo','kirtyhurty','BRAKE')
+                # while(Moving):
+                #     stats = parseStatus()
+                #     if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
+                #         Moving = False
+                Moving = False
+#         else:
+#             if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < float(CAPTURERADIUS) * 2)
+#                 a = 0
 
     if(mineFinding):
         2
@@ -100,17 +107,3 @@ def avoidWormHole(check, angleChange, angle, xDest,yDest):
     time.sleep(.2)
 
     return 0
-
-def checkMine(curInfo):
-
-    numMines = len(curInfo['mines'])
-    # flatMines = [x for sub in KNOWN_MINE_LOC for x in sub]
-    for ii in range(int(numMines)):
-        # minex = curInfo['mines'][ii][1]
-        # miney = curInfo['mines'][ii][2]
-        owner = curInfo['mines'][ii][0]
-        print (owner)
-        if owner != 'ElectricBoogalo':
-            return int(ii)
-
-    return -1
