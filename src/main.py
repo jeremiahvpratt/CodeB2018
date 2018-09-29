@@ -31,17 +31,19 @@ globals.SCANDELAY = config_rets[config_rets.index('SCANDELAY') + 1]
 circles = findCircles('canvas.png')
 path = bestPathAlg(circles.T)
 while(True):
-    for i in range(np.shape(path)[0]):
-        print(path[i][0])
-        print(path[i][1])
-        curInfo = parseStatus()
-        xTrue, yTrue = scanAhead(path[i][0],path[i][1])
-        if (xTrue == -1 and yTrue == -1):
-            print ('point skipped')
-            continue
-        moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
-        run('ElectricBoogalo','kirtyhurty','BRAKE')
-        time.sleep(4)
+    try:
+        for i in range(np.shape(path)[0]):
+            print(path[i][0])
+            print(path[i][1])
+            curInfo = parseStatus()
+            xTrue, yTrue = scanAhead(path[i][0],path[i][1])
+            if (xTrue == -1 and yTrue == -1):
+                print ('point skipped')
+                continue
+            moveToPoint(curInfo['x'],curInfo['y'],xTrue,yTrue,mineTaking=True)
+            run('ElectricBoogalo','kirtyhurty','BRAKE')
+            time.sleep(6)
+    except:
 # print(circles)
 # while(True):
 #     curInfo = parseStatus()
