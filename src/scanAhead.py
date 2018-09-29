@@ -38,6 +38,8 @@ def scanAhead(x, y):
 
     if(len(distList) > 0):
         correct = mineList[distList.index(min(distList))]
+        if (correct[0] == 'ElectricBoogalo'):
+            return -1, -1
         if numWormholes != '0':
             dist = math.hypot(correct[1] - wormholeList[0][0], correct[2] - wormholeList[0][1])
             if (dist < wormholeList[0][2]):
