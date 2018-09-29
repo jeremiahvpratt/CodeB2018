@@ -42,12 +42,13 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False):
             avoidWormHole(check, angleChange, angle, xDest,yDest)
 
         run('ElectricBoogalo','kirtyhurty','ACCELERATE ' + str(angle) + ' ' + str(speed))
-        if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < VISIONRADIUS * 2):
-            run('ElectricBoogalo','kirtyhurty','BRAKE')
-            while(Moving):
-                stats = parseStatus()
-                if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
-                    Moving = False
+        if(np.sqrt((float(stats['x'])-xDest)**2 + (float(stats['y'])-yDest)**2) < float(VISIONRADIUS) * 2):
+            # run('ElectricBoogalo','kirtyhurty','BRAKE')
+            # while(Moving):
+            #     stats = parseStatus()
+            #     if(float(stats['dx']) < 0.5 and float(stats['dy']) <0.5):
+            #         Moving = False
+            Moving = False
 
 
     return 1
