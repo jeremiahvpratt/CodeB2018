@@ -3,7 +3,7 @@ from clientpy3 import run
 from parseStatus import parseStatus
 from checkMine import checkMine
 from traceMap import traceMap
- 
+
 def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
 
     speed = 1
@@ -42,6 +42,7 @@ def moveToPoint(xCur,yCur,xDest,yDest,mineFinding=False,mineTaking=False):
                     return 1
         if(mineTaking):
             chk = checkMine(stats)
+            speed = 0.5
             if(chk == -2):
                 return 3
         angle = np.arctan((yDest-float(stats['y']))/(xDest-float(stats['x'])))
